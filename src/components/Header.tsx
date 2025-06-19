@@ -10,12 +10,12 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-r from-emerald-300 to-emerald-400 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-300/25 animate-pulse-glow">
-                <span className="text-brand-700 font-bold text-lg animate-float">B</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-800 rounded-xl flex items-center justify-center shadow-lg shadow-pink-300/25 animate-pulse-glow">
+                <span className="text-white font-bold text-lg animate-float">B</span>
               </div>
               <Sparkles 
                 size={16} 
-                className="absolute -top-1 -right-1 text-emerald-400 animate-pulse" 
+                className="absolute -top-1 -right-1 text-pink-400 animate-pulse" 
               />
             </div>
             <div>
