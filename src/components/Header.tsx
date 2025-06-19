@@ -10,8 +10,8 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25 animate-pulse-glow">
-                <span className="text-white font-bold text-lg animate-float">B</span>
+              <div className="w-10 h-10 bg-gradient-to-r from-emerald-300 to-emerald-400 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-300/25 animate-pulse-glow">
+                <span className="text-brand-700 font-bold text-lg animate-float">B</span>
               </div>
               <Sparkles 
                 size={16} 
@@ -19,7 +19,7 @@ const Header = () => {
               />
             </div>
             <div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-brand-700 via-brand-600 to-emerald-600 bg-clip-text text-transparent">Bê UX Creative</h1>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-brand-700 via-brand-600 to-brand-800 bg-clip-text text-transparent">Bê UX Creative</h1>
               <p className="text-xs text-neutral-500">Design System Library</p>
             </div>
           </div>
@@ -31,7 +31,7 @@ const Header = () => {
               <span>View on GitHub</span>
             </button>
             
-            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-brand text-white rounded-lg font-medium shadow-brand hover:shadow-glow transition-all duration-200 hover:scale-105">
+            <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-700 via-brand-600 to-brand-800 text-white rounded-lg font-medium shadow-brand hover:shadow-glow transition-all duration-200 hover:scale-105">
               <Download size={16} />
               <span>Export to Figma</span>
             </button>
