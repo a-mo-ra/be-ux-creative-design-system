@@ -103,6 +103,14 @@
     box-shadow: 0 4px 14px 0 rgba(91, 33, 182, 0.25);
   }
 
+  .shadow-glow {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+
+  .shadow-glow-lg {
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+  }
+
   .border-gradient {
     @apply relative overflow-hidden;
   }
@@ -114,6 +122,12 @@
     mask-composite: subtract;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
+  }
+
+  /* Grid Pattern Background */
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0);
+    background-size: 20px 20px;
   }
 
   /* Grid System */
@@ -132,12 +146,6 @@
   .text-scale-4 { @apply text-lg leading-7; }
   .text-scale-5 { @apply text-xl leading-8; }
   .text-scale-6 { @apply text-2xl leading-9; }
-
-  /* Grid Pattern Background */
-  .bg-grid-pattern {
-    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0);
-    background-size: 20px 20px;
-  }
 }
 
 /* Component Styles */

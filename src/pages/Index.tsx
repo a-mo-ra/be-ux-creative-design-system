@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { Palette, Sparkles, Copy, Download, Code, Book, Grid, Type, Zap } from 'lucide-react';
+import { Palette, Sparkles, Copy, Download, Code, Book, Grid, Type, Zap, FileText } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import Header from '@/components/Header';
 import ColorTokens from '@/components/design-system/ColorTokens';
@@ -9,6 +8,8 @@ import ComponentLibrary from '@/components/design-system/ComponentLibrary';
 import GridSystem from '@/components/design-system/GridSystem';
 import ShadowSystem from '@/components/design-system/ShadowSystem';
 import IconLibrary from '@/components/design-system/IconLibrary';
+import NavigationSystem from '@/components/design-system/NavigationSystem';
+import FormSystem from '@/components/design-system/FormSystem';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('colors');
@@ -19,7 +20,9 @@ const Index = () => {
     { id: 'components', label: 'Componentes', icon: Grid },
     { id: 'shadows', label: 'Sombras', icon: Sparkles },
     { id: 'icons', label: 'Ícones', icon: Zap },
-    { id: 'grid', label: 'Grid System', icon: Book }
+    { id: 'grid', label: 'Grid System', icon: Book },
+    { id: 'navigation', label: 'Navegação', icon: Code },
+    { id: 'forms', label: 'Formulários', icon: FileText }
   ];
 
   const renderActiveSection = () => {
@@ -36,6 +39,10 @@ const Index = () => {
         return <IconLibrary />;
       case 'grid':
         return <GridSystem />;
+      case 'navigation':
+        return <NavigationSystem />;
+      case 'forms':
+        return <FormSystem />;
       default:
         return <ColorTokens />;
     }
