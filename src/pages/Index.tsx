@@ -47,10 +47,10 @@ const Index = () => {
       
       <div className="container mx-auto px-4 py-8">
         <div className="mb-12 text-center">
-          <h1 className="text-display-lg font-bold text-gradient mb-4">
+          <h1 className="text-display-md font-bold text-gradient mb-4">
             Design System
           </h1>
-          <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
             Biblioteca completa de componentes, tokens e diretrizes para criar interfaces consistentes e bonitas.
           </p>
         </div>
@@ -68,8 +68,8 @@ const Index = () => {
                       onClick={() => setActiveSection(item.id)}
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 group ${
                         activeSection === item.id
-                          ? 'bg-brand-500 text-white shadow-brand'
-                          : 'text-neutral-700 hover:bg-neutral-50 hover:text-brand-600'
+                          ? 'bg-brand-700 text-white shadow-brand'
+                          : 'text-neutral-700 hover:bg-neutral-50 hover:text-brand-700'
                       }`}
                     >
                       <IconComponent 

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Sparkles, Github, Download, Heart } from 'lucide-react';
+import { Sparkles, Github, Download } from 'lucide-react';
 
 const Header = () => {
   return (
@@ -15,7 +15,7 @@ const Header = () => {
               </div>
               <Sparkles 
                 size={16} 
-                className="absolute -top-1 -right-1 text-brand-400 animate-pulse" 
+                className="absolute -top-1 -right-1 text-brand-600 animate-pulse" 
               />
             </div>
             <div>
@@ -26,21 +26,14 @@ const Header = () => {
 
           {/* Actions */}
           <div className="flex items-center gap-3">
-            <button className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-brand-600 hover:bg-neutral-50 rounded-lg transition-all duration-200">
+            <button className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-brand-700 hover:bg-neutral-50 rounded-lg transition-all duration-200">
               <Github size={16} />
-              <span>GitHub</span>
+              <span>View on GitHub</span>
             </button>
-            
-            <button className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 hover:text-brand-600 hover:bg-neutral-50 rounded-lg transition-all duration-200">
-              <Download size={16} />
-              <span>Export</span>
-            </button>
-
-            <div className="w-px h-6 bg-neutral-200"></div>
             
             <button className="flex items-center gap-2 px-4 py-2 bg-gradient-brand text-white rounded-lg font-medium shadow-brand hover:shadow-glow transition-all duration-200 hover:scale-105">
-              <Heart size={16} />
-              <span className="hidden sm:inline">Feito com amor</span>
+              <Download size={16} />
+              <span>Export to Figma</span>
             </button>
           </div>
         </div>

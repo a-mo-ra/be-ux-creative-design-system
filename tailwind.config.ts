@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,19 +52,19 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				// Design System Colors
+				// Design System Colors - Dark Purple Theme
 				brand: {
-					50: '#fef7ff',
-					100: '#fdeeff',
-					200: '#faddff',
-					300: '#f5bbff',
-					400: '#ed89ff',
-					500: '#e455ff',
-					600: '#d932f7',
-					700: '#bc1de0',
-					800: '#9818b8',
-					900: '#7d1a95',
-					950: '#540463'
+					50: '#f8f7ff',
+					100: '#f0eeff',
+					200: '#e1dcff',
+					300: '#c9bfff',
+					400: '#ab94ff',
+					500: '#8b5cf6',
+					600: '#7c3aed',
+					700: '#6d28d9',
+					800: '#5b21b6',
+					900: '#4c1d95',
+					950: '#2e1065'
 				},
 				neutral: {
 					50: '#fafafa',
