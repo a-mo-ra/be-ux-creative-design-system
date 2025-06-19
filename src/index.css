@@ -133,6 +133,12 @@
   .text-scale-4 { @apply text-lg leading-7; }
   .text-scale-5 { @apply text-xl leading-8; }
   .text-scale-6 { @apply text-2xl leading-9; }
+
+  /* Grid Pattern Background */
+  .bg-grid-pattern {
+    background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
 }
 
 /* Component Styles */
