@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Palette, Sparkles, Grid, Type, Zap, Book, Code, FileText, Menu, X } from 'lucide-react';
+import { Palette, Sparkles, Grid, Type, Zap, Book, Code, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 import Header from '@/components/Header';
 import ColorTokens from '@/components/design-system/ColorTokens';
 import TypographyScale from '@/components/design-system/TypographyScale';
@@ -50,21 +50,13 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       
       <div className="flex">
         {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-slate-900/50 border-r border-slate-700/50 min-h-[calc(100vh-80px)]`}>
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-white border-r border-gray-200 min-h-[calc(100vh-80px)] relative`}>
           <div className="sticky top-0 p-4">
-            {/* Sidebar Toggle */}
-            <button
-              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="mb-4 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-            >
-              {sidebarCollapsed ? <Menu size={20} /> : <X size={20} />}
-            </button>
-
             <nav>
               <div className="space-y-2">
                 {navigationItems.map((item) => {
@@ -75,8 +67,8 @@ const Index = () => {
                       onClick={() => setActiveSection(item.id)}
                       className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all duration-200 group ${
                         activeSection === item.id
-                          ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25'
-                          : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                          ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }`}
                       title={sidebarCollapsed ? item.label : ''}
                     >
@@ -95,6 +87,19 @@ const Index = () => {
               </div>
             </nav>
           </div>
+
+          {/* Sidebar Toggle Button */}
+          <button
+            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+            className="absolute top-1/2 -right-3 transform -translate-y-1/2 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-200 hover:bg-gray-50"
+            aria-label={sidebarCollapsed ? 'Expandir menu' : 'Recolher menu'}
+          >
+            {sidebarCollapsed ? (
+              <ChevronRight size={14} className="text-gray-600" />
+            ) : (
+              <ChevronLeft size={14} className="text-gray-600" />
+            )}
+          </button>
         </div>
 
         {/* Main Content */}
