@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Palette, Sparkles, Grid, Type, Zap, Book, Code, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Palette, Sparkles, Grid, Type, Zap, Book, Code, FileText, ChevronRight, ChevronLeft } from 'lucide-react';
 import Header from '@/components/Header';
 import ColorTokens from '@/components/design-system/ColorTokens';
 import TypographyScale from '@/components/design-system/TypographyScale';
@@ -58,16 +58,17 @@ const Index = () => {
         <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-white border-r border-gray-200 min-h-[calc(100vh-80px)] relative`}>
           <div className="sticky top-0 p-4">
             <nav>
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {navigationItems.map((item) => {
                   const IconComponent = item.icon;
+                  const isActive = activeSection === item.id;
                   return (
                     <button
                       key={item.id}
                       onClick={() => setActiveSection(item.id)}
                       className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all duration-200 group ${
-                        activeSection === item.id
-                          ? 'bg-indigo-50 text-indigo-700 border border-indigo-200 shadow-sm'
+                        isActive
+                          ? 'bg-purple-600 text-white shadow-lg'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }`}
                       title={sidebarCollapsed ? item.label : ''}
@@ -75,7 +76,7 @@ const Index = () => {
                       <IconComponent 
                         size={18} 
                         className={`transition-transform duration-200 ${
-                          activeSection === item.id ? 'scale-110' : 'group-hover:scale-105'
+                          isActive ? 'scale-110' : 'group-hover:scale-105'
                         } flex-shrink-0`}
                       />
                       {!sidebarCollapsed && (
@@ -88,16 +89,16 @@ const Index = () => {
             </nav>
           </div>
 
-          {/* Sidebar Toggle Button */}
+          {/* Sidebar Toggle Button - positioned like in the image */}
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="absolute top-1/2 -right-3 transform -translate-y-1/2 w-6 h-6 bg-white border border-gray-200 rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all duration-200 hover:bg-gray-50"
+            className="absolute top-1/2 -right-4 transform -translate-y-1/2 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-purple-700 z-10"
             aria-label={sidebarCollapsed ? 'Expandir menu' : 'Recolher menu'}
           >
             {sidebarCollapsed ? (
-              <ChevronRight size={14} className="text-gray-600" />
+              <ChevronRight size={16} />
             ) : (
-              <ChevronLeft size={14} className="text-gray-600" />
+              <ChevronLeft size={16} />
             )}
           </button>
         </div>
