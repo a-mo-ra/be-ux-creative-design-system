@@ -10,10 +10,12 @@ import ShadowSystem from '@/components/design-system/ShadowSystem';
 import IconLibrary from '@/components/design-system/IconLibrary';
 import NavigationSystem from '@/components/design-system/NavigationSystem';
 import FormSystem from '@/components/design-system/FormSystem';
+import DesignGuidelines from '@/components/design-system/DesignGuidelines';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('colors');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showGuidelines, setShowGuidelines] = useState(false);
 
   const navigationItems = [
     { id: 'colors', label: 'Cores & Tokens', icon: Palette },
@@ -27,6 +29,10 @@ const Index = () => {
   ];
 
   const renderActiveSection = () => {
+    if (showGuidelines) {
+      return <DesignGuidelines />;
+    }
+
     switch (activeSection) {
       case 'colors':
         return <ColorTokens />;
@@ -49,9 +55,18 @@ const Index = () => {
     }
   };
 
+  const handleGuidelinesClick = () => {
+    setShowGuidelines(!showGuidelines);
+  };
+
+  const handleSectionClick = (sectionId: string) => {
+    setActiveSection(sectionId);
+    setShowGuidelines(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
+      <Header onGuidelinesClick={handleGuidelinesClick} />
       
       <div className="flex">
         {/* Sidebar */}
@@ -61,23 +76,23 @@ const Index = () => {
               <div className="space-y-1">
                 {navigationItems.map((item) => {
                   const IconComponent = item.icon;
-                  const isActive = activeSection === item.id;
+                  const isActive = activeSection === item.id && !showGuidelines;
                   return (
                     <button
                       key={item.id}
-                      onClick={() => setActiveSection(item.id)}
+                      onClick={() => handleSectionClick(item.id)}
                       className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all duration-200 group ${
                         isActive
                           ? 'bg-purple-600 text-white shadow-lg'
                           : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                      }`}
+                      } ${sidebarCollapsed ? 'justify-center' : ''}`}
                       title={sidebarCollapsed ? item.label : ''}
                     >
                       <IconComponent 
                         size={18} 
                         className={`transition-transform duration-200 ${
                           isActive ? 'scale-110' : 'group-hover:scale-105'
-                        } flex-shrink-0`}
+                        } flex-shrink-0 ${sidebarCollapsed ? 'mx-auto' : ''}`}
                       />
                       {!sidebarCollapsed && (
                         <span className="font-medium truncate">{item.label}</span>
@@ -89,18 +104,20 @@ const Index = () => {
             </nav>
           </div>
 
-          {/* Sidebar Toggle Button - positioned like in the image */}
-          <button
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="absolute top-1/2 -right-4 transform -translate-y-1/2 w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-purple-700 z-10"
-            aria-label={sidebarCollapsed ? 'Expandir menu' : 'Recolher menu'}
-          >
-            {sidebarCollapsed ? (
-              <ChevronRight size={16} />
-            ) : (
-              <ChevronLeft size={16} />
-            )}
-          </button>
+          {/* Sidebar Toggle Button - Fixed position */}
+          <div className="fixed top-1/2 transform -translate-y-1/2 z-40" style={{ left: sidebarCollapsed ? '48px' : '240px' }}>
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 hover:bg-purple-700"
+              aria-label={sidebarCollapsed ? 'Expandir menu' : 'Recolher menu'}
+            >
+              {sidebarCollapsed ? (
+                <ChevronRight size={16} />
+              ) : (
+                <ChevronLeft size={16} />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Main Content */}

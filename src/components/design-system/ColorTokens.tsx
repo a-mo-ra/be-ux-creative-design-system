@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
-import { Copy, Check, Palette } from 'lucide-react';
+import { Copy, Check, Palette, Figma } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 const ColorTokens = () => {
   const [copiedToken, setCopiedToken] = useState<string | null>(null);
@@ -11,16 +11,16 @@ const ColorTokens = () => {
       name: 'Brand Colors',
       description: 'Cores principais da marca, use para elementos de destaque e identidade visual.',
       colors: [
-        { name: 'brand-50', value: '#fef7ff', usage: 'Backgrounds sutis' },
-        { name: 'brand-100', value: '#fdeeff', usage: 'Hover states suaves' },
-        { name: 'brand-200', value: '#faddff', usage: 'Borders e divisores' },
-        { name: 'brand-300', value: '#f5bbff', usage: 'Elementos inativos' },
-        { name: 'brand-400', value: '#ed89ff', usage: 'Ícones secundários' },
-        { name: 'brand-500', value: '#e455ff', usage: 'Cor principal da marca' },
-        { name: 'brand-600', value: '#d932f7', usage: 'Hover em botões primários' },
-        { name: 'brand-700', value: '#bc1de0', usage: 'Active states' },
-        { name: 'brand-800', value: '#9818b8', usage: 'Texto em fundos claros' },
-        { name: 'brand-900', value: '#7d1a95', usage: 'Headings importantes' }
+        { name: 'brand-50', value: '#faf7ff', usage: 'Backgrounds sutis' },
+        { name: 'brand-100', value: '#f4edff', usage: 'Hover states suaves' },
+        { name: 'brand-200', value: '#e9d5ff', usage: 'Borders e divisores' },
+        { name: 'brand-300', value: '#d8b4fe', usage: 'Elementos inativos' },
+        { name: 'brand-400', value: '#c084fc', usage: 'Ícones secundários' },
+        { name: 'brand-500', value: '#a855f7', usage: 'Cor principal da marca' },
+        { name: 'brand-600', value: '#9333ea', usage: 'Hover em botões primários' },
+        { name: 'brand-700', value: '#7c3aed', usage: 'Active states' },
+        { name: 'brand-800', value: '#6b21a8', usage: 'Texto em fundos claros' },
+        { name: 'brand-900', value: '#581c87', usage: 'Headings importantes' }
       ]
     },
     {
@@ -72,7 +72,7 @@ const ColorTokens = () => {
   return (
     <div className="space-y-8">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
+        <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
           <Palette size={16} className="text-white" />
         </div>
         <div>
@@ -130,6 +130,54 @@ const ColorTokens = () => {
           </div>
         </div>
       ))}
+
+      {/* Figma Specifications */}
+      <div className="bg-white rounded-xl p-6 shadow-elevation-2 border border-neutral-200/50">
+        <div className="flex items-center gap-3 mb-4">
+          <Figma size={20} className="text-purple-600" />
+          <h3 className="text-lg font-semibold text-neutral-900">Figma Specifications</h3>
+        </div>
+        <div className="border-b border-gray-200 mb-6"></div>
+        
+        <div className="space-y-4">
+          <div className="bg-neutral-50 rounded-lg p-4">
+            <h4 className="font-medium text-neutral-800 mb-3">Configurações para Cores Responsivas</h4>
+            <div className="text-sm text-neutral-600 space-y-2">
+              <p><strong>Variables:</strong> Crie Color Variables para cada token (brand-50, brand-100, etc.)</p>
+              <p><strong>Modes:</strong> Configure Light e Dark modes para cada variable</p>
+              <p><strong>Collections:</strong> Organize em "Brand", "Neutral" e "Status" collections</p>
+              <p><strong>Naming:</strong> Use o padrão "scale/weight" (ex: brand/500, neutral/700)</p>
+            </div>
+          </div>
+
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="css-code">
+              <AccordionTrigger className="text-left">
+                <span className="font-medium">Código CSS</span>
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="bg-gray-900 rounded-lg p-4 overflow-x-auto">
+                  <code className="text-green-400 text-sm whitespace-pre">
+{`:root {
+  /* Brand Colors */
+  --brand-50: #faf7ff;
+  --brand-100: #f4edff;
+  --brand-200: #e9d5ff;
+  --brand-300: #d8b4fe;
+  --brand-400: #c084fc;
+  --brand-500: #a855f7;
+  --brand-600: #9333ea;
+  --brand-700: #7c3aed;
+  --brand-800: #6b21a8;
+  --brand-900: #581c87;
+}`}
+                  </code>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
 
       {/* Usage Guidelines */}
       <div className="bg-gradient-to-br from-brand-50 to-white rounded-xl p-6 border border-brand-200/50">

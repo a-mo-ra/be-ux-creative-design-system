@@ -2,12 +2,11 @@
 import React from 'react';
 import { Sparkles, FileText } from 'lucide-react';
 
-const Header = () => {
-  const handleGuidelinesClick = () => {
-    // Abrir diretrizes em nova aba ou modal
-    window.open('/diretrizes-design.pdf', '_blank');
-  };
+interface HeaderProps {
+  onGuidelinesClick: () => void;
+}
 
+const Header = ({ onGuidelinesClick }: HeaderProps) => {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200">
       <div className="container mx-auto px-6 py-4">
@@ -32,8 +31,8 @@ const Header = () => {
           {/* Actions */}
           <div className="flex items-center gap-3">
             <button 
-              onClick={handleGuidelinesClick}
-              className="flex items-center gap-2 px-4 py-2 bg-purple-700 text-white rounded-lg font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-200 hover:scale-105 text-sm"
+              onClick={onGuidelinesClick}
+              className="flex items-center gap-2 px-3 py-2 bg-purple-700 text-white rounded-lg font-medium shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all duration-200 hover:scale-105 text-sm hover:bg-purple-800"
             >
               <FileText size={14} />
               <span>Diretrizes UX Creative</span>
