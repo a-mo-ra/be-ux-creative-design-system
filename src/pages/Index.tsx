@@ -1,6 +1,6 @@
+
 import React, { useState } from 'react';
-import { Palette, Sparkles, Copy, Download, Code, Book, Grid, Type, Zap, FileText } from 'lucide-react';
-import { toast } from '@/hooks/use-toast';
+import { Palette, Sparkles, Grid, Type, Zap, Book, Code, FileText, Menu, X } from 'lucide-react';
 import Header from '@/components/Header';
 import ColorTokens from '@/components/design-system/ColorTokens';
 import TypographyScale from '@/components/design-system/TypographyScale';
@@ -13,6 +13,7 @@ import FormSystem from '@/components/design-system/FormSystem';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('colors');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const navigationItems = [
     { id: 'colors', label: 'Cores & Tokens', icon: Palette },
@@ -49,52 +50,56 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-slate-950">
       <Header />
       
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-12 text-center">
-          <h1 className="text-display-md font-bold text-gradient mb-4">
-            Design System
-          </h1>
-          <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-            Biblioteca completa de componentes, tokens e diretrizes para criar interfaces consistentes e bonitas.
-          </p>
-        </div>
+      <div className="flex">
+        {/* Sidebar */}
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} transition-all duration-300 bg-slate-900/50 border-r border-slate-700/50 min-h-[calc(100vh-80px)]`}>
+          <div className="sticky top-0 p-4">
+            {/* Sidebar Toggle */}
+            <button
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="mb-4 p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+            >
+              {sidebarCollapsed ? <Menu size={20} /> : <X size={20} />}
+            </button>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar Navigation */}
-          <div className="lg:w-64 lg:flex-shrink-0">
-            <nav className="sticky top-8">
-              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-2 shadow-elevation-2 border border-neutral-200/50">
+            <nav>
+              <div className="space-y-2">
                 {navigationItems.map((item) => {
                   const IconComponent = item.icon;
                   return (
                     <button
                       key={item.id}
                       onClick={() => setActiveSection(item.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 group ${
+                      className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg text-left transition-all duration-200 group ${
                         activeSection === item.id
-                          ? 'bg-brand-700 text-white shadow-brand'
-                          : 'text-neutral-700 hover:bg-neutral-50 hover:text-brand-700'
+                          ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/25'
+                          : 'text-slate-300 hover:bg-slate-800 hover:text-white'
                       }`}
+                      title={sidebarCollapsed ? item.label : ''}
                     >
                       <IconComponent 
                         size={18} 
                         className={`transition-transform duration-200 ${
                           activeSection === item.id ? 'scale-110' : 'group-hover:scale-105'
-                        }`}
+                        } flex-shrink-0`}
                       />
-                      <span className="font-medium">{item.label}</span>
+                      {!sidebarCollapsed && (
+                        <span className="font-medium truncate">{item.label}</span>
+                      )}
                     </button>
                   );
                 })}
               </div>
             </nav>
           </div>
+        </div>
 
-          {/* Main Content */}
-          <div className="flex-1 min-w-0">
+        {/* Main Content */}
+        <div className="flex-1 min-w-0 p-6">
+          <div className="max-w-7xl mx-auto">
             <div className="animate-fade-in">
               {renderActiveSection()}
             </div>
