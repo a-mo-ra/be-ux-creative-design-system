@@ -1,7 +1,8 @@
-
 import React, { useState } from 'react';
 import { Navigation, Copy, Check, Smartphone, Tablet, Monitor, Menu, X, Home, User, Search, Bell, Settings } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Separator } from '@/components/ui/separator';
 
 const NavigationSystem = () => {
   const [copiedComponent, setCopiedComponent] = useState<string | null>(null);
@@ -283,24 +284,24 @@ const NavigationSystem = () => {
   return (
     <div className="space-y-8 max-w-7xl">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
+        <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
           <Navigation size={16} className="text-white" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-neutral-900">Sistema de Navegação</h2>
-          <p className="text-neutral-600">Headers, navbars, bottom navigation e sidebars responsivos</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Sistema de Navegação</h2>
+          <p className="text-gray-600 dark:text-gray-300">Headers, navbars, bottom navigation e sidebars responsivos</p>
         </div>
       </div>
 
       {/* Device Guidelines */}
-      <div className="bg-white rounded-xl p-6 shadow-elevation-2 border border-neutral-200/50">
-        <h3 className="text-lg font-semibold text-neutral-900 mb-6">Diretrizes por Dispositivo</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-elevation-2 border border-gray-200 dark:border-gray-700">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Diretrizes por Dispositivo</h3>
         
         <div className="grid md:grid-cols-3 gap-6">
           {deviceSizes.map((device) => {
             const IconComponent = device.icon;
             return (
-              <div key={device.name} className="p-4 border border-neutral-200 rounded-lg">
+              <div key={device.name} className="p-4 border border-gray-200 rounded-lg">
                 <div className="flex items-center gap-3 mb-4">
                   <IconComponent className="w-6 h-6 text-brand-500" />
                   <div>
@@ -342,12 +343,12 @@ const NavigationSystem = () => {
 
       {/* Navigation Components */}
       {navigationComponents.map((nav) => (
-        <div key={nav.name} className="bg-white rounded-xl p-6 shadow-elevation-2 border border-neutral-200/50">
+        <div key={nav.name} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-elevation-2 border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h3 className="text-lg font-semibold text-neutral-900 mb-2">{nav.name}</h3>
-              <div className="flex items-center gap-4 text-sm text-neutral-600">
-                <span className="px-2 py-1 bg-brand-100 text-brand-700 rounded text-xs font-medium">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{nav.name}</h3>
+              <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
+                <span className="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded text-xs font-medium">
                   {nav.type}
                 </span>
                 <span>{nav.usage}</span>
@@ -355,7 +356,7 @@ const NavigationSystem = () => {
             </div>
             <button
               onClick={() => copyToClipboard(nav.code, nav.name)}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-brand-500 hover:bg-brand-600 rounded-lg transition-all duration-200"
+              className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-lg transition-all duration-200"
             >
               {copiedComponent === nav.name ? (
                 <Check size={16} className="text-white" />
@@ -366,36 +367,53 @@ const NavigationSystem = () => {
             </button>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6">
-            <div>
-              <h4 className="font-medium text-neutral-800 mb-3">Preview</h4>
-              <div className="border border-neutral-200 rounded-lg overflow-hidden">
+          {/* Preview em tela cheia */}
+          <div className="mb-6">
+            <h4 className="font-medium text-gray-800 dark:text-gray-200 mb-3">Preview</h4>
+            <div className="border border-gray-200 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-700">
+              <div className="w-full overflow-x-auto">
                 {nav.component}
-              </div>
-              
-              <div className="mt-4 text-sm text-neutral-600">
-                <div><strong>Behavior:</strong> {nav.behavior}</div>
-                <div><strong>Constraints:</strong> {nav.constraints}</div>
               </div>
             </div>
             
+            <div className="mt-4 grid md:grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-300">
+              <div><strong>Behavior:</strong> {nav.behavior}</div>
+              <div><strong>Constraints:</strong> {nav.constraints}</div>
+            </div>
+          </div>
+          
+          {/* Figma Specifications com separador */}
+          <div className="space-y-4">
             <div>
-              <h4 className="font-medium text-neutral-800 mb-3">Figma Specifications</h4>
-              <div className="bg-neutral-50 p-4 rounded-lg space-y-2 text-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="font-medium text-gray-800 dark:text-gray-200">Figma Specifications</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" className="text-purple-600 dark:text-purple-400">
+                  <path fill="currentColor" d="M15.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"/>
+                </svg>
+              </div>
+              <Separator className="mb-4" />
+              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-2 text-sm">
                 <div><strong>Width:</strong> {nav.figmaSpecs.width}</div>
                 <div><strong>Height:</strong> {nav.figmaSpecs.height}</div>
                 <div><strong>Padding:</strong> {nav.figmaSpecs.padding}</div>
                 <div><strong>Constraints:</strong> {nav.figmaSpecs.constraints}</div>
                 <div><strong>Auto Layout:</strong> {nav.figmaSpecs.autoLayout}</div>
               </div>
-              
-              <div className="mt-4">
-                <h5 className="font-medium text-neutral-800 mb-2">Code</h5>
-                <div className="bg-neutral-900 text-neutral-100 p-3 rounded-lg text-xs font-mono overflow-x-auto">
-                  <pre>{nav.code}</pre>
-                </div>
-              </div>
             </div>
+            
+            {/* Código em accordion */}
+            <Accordion type="single" collapsible>
+              <AccordionItem value="code">
+                <AccordionTrigger className="text-left">
+                  <span className="font-medium">Código CSS</span>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="bg-gray-900 dark:bg-gray-800 text-gray-100 p-4 rounded-lg text-xs font-mono overflow-x-auto">
+                    <pre>{nav.code}</pre>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       ))}

@@ -1,10 +1,27 @@
-
 import React, { useState } from 'react';
 import { Sparkles, Copy, Check } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 
 const ShadowSystem = () => {
   const [copiedShadow, setCopiedShadow] = useState<string | null>(null);
+
+  const copyToClipboard = async (css: string, shadowName: string) => {
+    try {
+      await navigator.clipboard.writeText(css);
+      setCopiedShadow(shadowName);
+      toast({
+        title: "Copiado!",
+        description: `CSS da ${shadowName} copiado para área de transferência.`,
+      });
+      setTimeout(() => setCopiedShadow(null), 2000);
+    } catch (err) {
+      toast({
+        title: "Erro",
+        description: "Não foi possível copiar o CSS.",
+        variant: "destructive"
+      });
+    }
+  };
 
   const shadowLevels = [
     {
@@ -60,24 +77,6 @@ const ShadowSystem = () => {
     }
   ];
 
-  const copyToClipboard = async (shadowClass: string) => {
-    try {
-      await navigator.clipboard.writeText(shadowClass);
-      setCopiedShadow(shadowClass);
-      toast({
-        title: "Copiado!",
-        description: `Classe ${shadowClass} copiada para a área de transferência.`,
-      });
-      setTimeout(() => setCopiedShadow(null), 2000);
-    } catch (err) {
-      toast({
-        title: "Erro",
-        description: "Não foi possível copiar a classe.",
-        variant: "destructive"
-      });
-    }
-  };
-
   const renderShadowGrid = (shadows: any[], title: string) => (
     <div className="bg-white rounded-xl p-6 shadow-elevation-2 border border-neutral-200/50">
       <h3 className="text-lg font-semibold text-neutral-900 mb-6">{title}</h3>
@@ -95,7 +94,7 @@ const ShadowSystem = () => {
               <div className="flex items-center justify-between">
                 <h4 className="font-medium text-neutral-800">{shadow.name}</h4>
                 <button
-                  onClick={() => copyToClipboard(shadow.class)}
+                  onClick={() => copyToClipboard(shadow.class, shadow.name)}
                   className="opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-neutral-100 transition-all duration-200"
                   title="Copiar classe"
                 >
@@ -126,14 +125,14 @@ const ShadowSystem = () => {
   );
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 max-w-7xl">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
+        <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center">
           <Sparkles size={16} className="text-white" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-neutral-900">Sistema de Sombras</h2>
-          <p className="text-neutral-600">Elevação e profundidade para criar hierarquia visual</p>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Sistema de Sombras</h2>
+          <p className="text-gray-600 dark:text-gray-300">Elevação e profundidade através de sombras consistentes</p>
         </div>
       </div>
 
@@ -150,7 +149,7 @@ const ShadowSystem = () => {
               <div key={shadow.class} className="text-center">
                 <div 
                   className={`w-16 h-16 bg-white rounded-xl ${shadow.class} mx-auto mb-3 border border-neutral-100 hover:scale-110 transition-transform duration-200 cursor-pointer flex items-center justify-center`}
-                  onClick={() => copyToClipboard(shadow.class)}
+                  onClick={() => copyToClipboard(shadow.class, shadow.name)}
                 >
                   <span className="text-sm font-semibold text-neutral-600">{index + 1}</span>
                 </div>
